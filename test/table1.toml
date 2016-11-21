@@ -1,0 +1,14 @@
+[[Tables]]
+Id = 1
+Col1 = "string1"
+Col2 = 100
+
+[[Tables]]
+Id = 2
+Col1 = "string2"
+Col2 = 200
+
+[[Tables]]
+Id = 3
+Col1 = "string3"
+Col2 = 300
