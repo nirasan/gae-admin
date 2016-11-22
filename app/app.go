@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"text/template"
+	"github.com/nirasan/gae-admin/bindata"
 )
 
 func init() {
@@ -33,26 +34,7 @@ func adminIndexHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	u := user.Current(ctx)
 
-	tmpl := `
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Admin index page</title>
-	</head>
-	<body>
-		{{ if .User }}
-			Welcome, {{ .User }} (<a href="{{ .LogoutUrl }}">sign out</a>)
-			<h3>contents</h3>
-			<ul>
-			  <li><a href="/admin/toml">Toml Importer</a></li>
-			</ul>
-		{{ else }}
-			<a href="{{ .LoginUrl }}">Sign in or register</a><br>
-		{{ end }}
-	</body>
-</html>
-`
-	t, err := template.New("").Parse(tmpl)
+	t, err := template.New("").Parse(string(bindata.MustAsset("index.html")))
 	if err != nil {
 		panic(err)
 	}
@@ -120,21 +102,7 @@ func adminTomlImportHander(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// render form
-	tmpl := `
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Admin toml importer</title>
-	</head>
-	<body>
-		<form enctype="multipart/form-data" action="/admin/toml" method="post">
-			<input type="file" name="uploadfile" />
-			<input type="submit" value="upload" />
-		</form>
-	</body>
-</html>
-`
-	t, err := template.New("").Parse(tmpl)
+	t, err := template.New("").Parse(string(bindata.MustAsset("toml.html")))
 	if err != nil {
 		panic(err)
 	}

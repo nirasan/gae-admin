@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin index page</title>
+    </head>
+    <body>
+        {{ if .User }}
+        Welcome, {{ .User }} (<a href="{{ .LogoutUrl }}">sign out</a>)
+        <h3>contents</h3>
+        <ul>
+            <li><a href="/admin/toml">Toml Importer</a></li>
+        </ul>
+        {{ else }}
+        <a href="{{ .LoginUrl }}">Sign in or register</a><br>
+        {{ end }}
+    </body>
+</html>
